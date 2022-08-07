@@ -4,9 +4,15 @@ const routes = [
     {
         path: "/",
         name: "home",
-        key: 1,
         component: import('@/layout/Frame'),
+        redirect: '/dashboard',
         children: [
+            {
+                path: "/dashboard",
+                name: "dashboard",
+                key: 1,
+                component: import('@/pages/home/Dashboard')
+            },
             {
                 path: "/stockMark",
                 name: "mark",
@@ -25,10 +31,21 @@ const routes = [
                 key: 4,
                 component: import('@/pages/home/EventCalendar')
             },
+        ],
+    },
+    {
+        path: "/user",
+        name: "user",
+        component: import('@/layout/Frame'),
+        children: [
             {
-                path: "/userProfile",
-                name: "user",
-                key: 5,
+                path: "setting",
+                name: "setting",
+                component: import('@/pages/Setting')
+            },
+            {
+                path: "profile",
+                name: "profile",
                 component: import('@/pages/user/UserProfile')
             },
         ],
@@ -44,7 +61,13 @@ const routes = [
         name: "register",
         key: 11,
         component: import('@/pages/login/Register')
-    }
+    },
+    {
+        path: "/qrcode",
+        name: "qrcode",
+        key: 12,
+        component: import('@/pages/login/QrCode')
+    },
     
 ]
 

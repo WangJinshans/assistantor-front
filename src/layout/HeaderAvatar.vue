@@ -1,17 +1,17 @@
 <template>
 
   <a-dropdown placement="bottom">
-    <div class="header-avatar" style="cursor: pointer">
+    <div class="header-avatar" style="cursor: pointer" @click="userClick">
       <a-avatar class="avatar" size="small" shape="circle" :src="user.avatar"/>
       <span class="name">{{user.name}}</span>
     </div>
     <template #overlay>
-      <a-menu class="avatar-menu" @click="">
+      <a-menu class="avatar-menu">
         <a-menu-item>
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="http://www.alipay.com/"
+            @click="profileClick"
           >
             个人中心
           </a>
@@ -20,7 +20,7 @@
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="http://www.taobao.com/"
+            @click="settingClick"
           >
             设置
           </a>
@@ -58,6 +58,12 @@ export default {
       if (token == null){
         this.$router.push('/login')
       }
+    },
+    settingClick() {
+      this.$router.push('/user/setting')
+    },
+    profileClick() {
+      this.$router.push('/user/profile')
     },
     signout() {
       let userId = localStorage.getItem('user_id')

@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <div class="top">
+  <div id='login'>
+    <div class="top"></div>
+    <div class="login">
       <div class="header">
         <img
           alt="logo"
@@ -10,8 +11,6 @@
         <span class="title">{{ systemName }}</span>
       </div>
       <div class="desc">It's free and alawys will be</div>
-    </div>
-    <div class="login">
       <a-form
         @submit="onSubmit"
         :model="formInfo"
@@ -129,9 +128,6 @@
 </template>
 
 <script>
-// import {setAuthorization} from '@/utils/request'
-// import {mapMutations} from 'vuex'
-
 import {
   TaobaoCircleOutlined,
   AlipayCircleOutlined,
@@ -196,20 +192,20 @@ export default {
     },
 
     ras_encrypt() {
-      let encryptStr = new JSEncrypt()
-      encryptStr.setPublicKey(this.pub_key) // 设置 加密公钥
-      let data = encryptStr.encrypt(this.formInfo.pass_word) // 进行加密
+      let encryptStr = new JSEncrypt();
+      encryptStr.setPublicKey(this.pub_key); // 设置 加密公钥
+      let data = encryptStr.encrypt(this.formInfo.pass_word); // 进行加密
       return data;
     },
 
     afterLogin(data) {
       // this.logging = false
       let loginRes = data.message;
-      let token = data.token
-      let userId = data.user_id
-      console.log(`token is: ${token}`)
-      localStorage.setItem('token', token)
-      localStorage.setItem('user_id', userId)
+      let token = data.token;
+      let userId = data.user_id;
+      console.log(`token is: ${token}`);
+      localStorage.setItem("token", token);
+      localStorage.setItem("user_id", userId);
       if (loginRes === "success") {
         this.$router.push("/");
       }
@@ -219,9 +215,26 @@ export default {
 </script>
 
 <style lang="less" scoped>
+#login {
+  border: none;
+  height: inherit;
+  background-color: #f1f1f1;
+  background-position: center center;
+  background-image: url("@/assets/img/register.jpg");
+  // background-image: url('@/assets/img/login.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
 .top {
   text-align: center;
   padding: 112px 0 10px;
+}
+
+.login {
+  width: 368px;
+  margin-left: 150px;
+  
   .header {
     height: 44px;
     line-height: 44px;
@@ -247,11 +260,6 @@ export default {
     margin-top: 12px;
     margin-bottom: 40px;
   }
-}
-
-.login {
-  width: 368px;
-  margin: 0 auto;
   @media screen and (max-width: 576px) {
     width: 95%;
   }
